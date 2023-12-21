@@ -11,6 +11,12 @@ morgan.token('body', req => {
 
 const requestLogger = morgan(':method :url :status :res[content-length] - :response-time ms :body')
 
+const unknownEndpoint = (request, response) => {
+    response.status(404).send({
+        error:"unknown endpoint"
+    })
+}
+
 app.use(cors())
 app.use(express.json())
 app.use(express.static('dist'))
@@ -117,6 +123,8 @@ app.post('/api/persons', (request, response) => {
 
     response.json(person)
 })
+
+app.use(unknownEndpoint)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
