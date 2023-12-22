@@ -13,7 +13,7 @@ const requestLogger = morgan(':method :url :status :res[content-length] - :respo
 
 const unknownEndpoint = (request, response) => {
     response.status(404).send({
-        error:"unknown endpoint"
+        error: "unknown endpoint"
     })
 }
 
